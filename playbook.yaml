@@ -1,0 +1,17 @@
+---
+- name: Add user and configure sudoers
+  hosts: all
+  become: true
+  tasks:
+    - name: Add user
+      user:
+        name: user
+        password: user
+        state: present
+
+    - name: Add sudoers file
+      copy:
+        dest: /etc/sudoers.d/user
+        content: |
+          user ALL=(ALL) NOPASSWD: ALL
+        mode: "0440"

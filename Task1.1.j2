@@ -1,0 +1,16 @@
+{% set example = "AAAAABBDCAAADDDDBC" %}
+{% set result = "" %}
+{% set count = 1 %}
+
+{% for i in range(1, example|length) %}
+    {% if example[i] == example[i-1] %}
+        {% set count = count + 1 %}
+    {% else %}
+        {% set result = result + example[i-1] + (count > 1) | ternary(count|string, '') %}
+        {% set count = 1 %}
+    {% endif %}
+{% endfor %}
+
+{% set result = result + example[-1] + (count > 1) | ternary(count|string, '') %}
+
+{{ result }}
