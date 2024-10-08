@@ -1,0 +1,13 @@
+{% set result = "" %}
+{% set count = 1 %}
+
+{% for i in range(0, input_string | length) %}
+  {% if i < (input_string | length) - 1 and input_string[i] == input_string[i+1] %}
+    {% set count = count + 1 %}
+  {% else %}
+    {% set result = result + input_string[i] + (count | string if count > 1 else "") %}
+    {% set count = 1 %}
+  {% endif %}
+{% endfor %}
+
+{{ result }}

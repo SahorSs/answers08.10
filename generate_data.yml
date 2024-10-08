@@ -1,0 +1,15 @@
+---
+- name: String compression using Jinja2
+  hosts: localhost
+  vars:
+    input_string: "AAAAABBDCAAADDDDBC"
+  tasks:
+    - name: Compress string
+      template:
+        src: compression_template.j2
+        dest: /home/xinnor/answers08.10/compressed_string.txt
+    - name: Display compressed result
+      command: cat /tmp/compressed_string.txt
+      register: result
+    - debug:
+        msg: "Compressed string: {{ result.stdout }}"
